@@ -334,6 +334,42 @@
     flex-shrink: 0;
   }
 
+  .metric-toggle {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .metric-btn {
+    background: rgba(10,16,24,0.7);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    padding: 6px 4px;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .metric-btn:hover { border-color: var(--frost-dim); }
+  .metric-btn.active {
+    border-color: #6aff7a;
+    background: rgba(106,255,122,0.10);
+  }
+  .metric-btn .mb-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ice);
+    line-height: 1.2;
+  }
+  .metric-btn .mb-sub {
+    font-size: 8px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    line-height: 1.2;
+  }
+  .metric-btn.active .mb-title { color: #6aff7a; }
+
   /* ---------- Layout mode buttons ---------- */
   .layout-modes {
     display: flex; flex-direction: column; gap: 6px;
@@ -476,6 +512,42 @@
     60% { transform: translate(calc(-50% - 4px), 0); }
     80% { transform: translate(calc(-50% + 4px), 0); }
   }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(80px + var(--safe-bottom));
+    transform: translate(-50%, 20px);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--frost);
+    padding: 10px 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    z-index: 60;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.25s cubic-bezier(.2,.9,.25,1);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    max-width: min(420px, calc(100vw - 40px));
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  .toast.toast-success { border-left-color: #6aff7a; }
+  .toast.toast-error { border-left-color: var(--danger); color: var(--danger); }
+  .toast .toast-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .toast.toast-success .toast-title { color: #6aff7a; }
+  .toast.toast-error .toast-title { color: var(--danger); }
 
   .filters-list { padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }
   .filter-pill {
@@ -779,17 +851,40 @@
             <span id="legendTotalPower" style="color:var(--frost);">—</span> combined power<br>
             <span id="legendTotalScore" style="color:#6aff7a;">—</span> total ★ avg BT score
           </div>
-          <div class="legend-section-title" style="margin-top:8px;">Color = Avg BT Score (★) or Power</div>
-          <div class="power-scale">
-            <div class="ps-row"><span class="ps-sw" style="background:#6aff7a"></span><span>★ 100M+ &nbsp; (or 300M power)</span></div>
-            <div class="ps-row"><span class="ps-sw" style="background:#3fd96a"></span><span>★ 60–100M &nbsp; (or 200M power)</span></div>
-            <div class="ps-row"><span class="ps-sw" style="background:#2ea858"></span><span>★ 40–60M &nbsp; (or 150M power)</span></div>
-            <div class="ps-row"><span class="ps-sw" style="background:#1f7a44"></span><span>★ 25–40M &nbsp; (or 100M power)</span></div>
-            <div class="ps-row"><span class="ps-sw" style="background:#155534"></span><span>★ 10–25M &nbsp; (or 50M power)</span></div>
-            <div class="ps-row"><span class="ps-sw" style="background:#0d3524"></span><span>Lower</span></div>
+          <div class="legend-section-title" style="margin-top:8px;">Brightness Source</div>
+          <div class="metric-toggle">
+            <button class="metric-btn" data-metric="auto" id="metricBtnAuto">
+              <div class="mb-title">AUTO</div>
+              <div class="mb-sub">★ score, power as fallback</div>
+            </button>
+            <button class="metric-btn" data-metric="score" id="metricBtnScore">
+              <div class="mb-title">★ BT SCORE</div>
+              <div class="mb-sub">measured avg only</div>
+            </button>
+            <button class="metric-btn" data-metric="power" id="metricBtnPower">
+              <div class="mb-title">POWER</div>
+              <div class="mb-sub">raw chief power</div>
+            </button>
           </div>
-          <div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.4;">
-            ★ = uses measured average bear-trap score. Without score data, falls back to power.
+
+          <div class="power-scale" id="scaleScore">
+            <div class="ps-row"><span class="ps-sw" style="background:#6aff7a"></span><span>★ 100M+</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#3fd96a"></span><span>★ 60 – 100M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#2ea858"></span><span>★ 40 – 60M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#1f7a44"></span><span>★ 25 – 40M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#155534"></span><span>★ 10 – 25M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#0d3524"></span><span>★ &lt; 10M</span></div>
+          </div>
+          <div class="power-scale" id="scalePower">
+            <div class="ps-row"><span class="ps-sw" style="background:#6aff7a"></span><span>300M+ power</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#3fd96a"></span><span>200 – 300M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#2ea858"></span><span>150 – 200M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#1f7a44"></span><span>100 – 150M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#155534"></span><span>50 – 100M</span></div>
+            <div class="ps-row"><span class="ps-sw" style="background:#0d3524"></span><span>&lt; 50M</span></div>
+          </div>
+          <div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.4;" id="scaleHint">
+            ★ uses measured average bear-trap score (27 players). Falls back to power for the rest.
           </div>
         </div>
         <div class="legend-section">
@@ -884,6 +979,25 @@
             <span class="btn-ico">↺</span> <span>Reset to Original</span>
           </button>
         </div>
+        <div class="legend-section">
+          <div class="legend-section-title">Share</div>
+          <button class="layout-action" id="exportLayoutBtn">
+            <span class="btn-ico">↓</span> <span>Export Layout (.json)</span>
+          </button>
+          <button class="layout-action" id="importLayoutBtn" style="margin-top:6px;">
+            <span class="btn-ico">↑</span> <span>Import Layout</span>
+          </button>
+          <input type="file" id="importLayoutFile" accept=".json,application/json" style="display:none;">
+          <div style="color:var(--text-dim);font-size:10px;margin-top:8px;line-height:1.5;">
+            Save the current layout to a file or load one shared by an alliance member.
+          </div>
+          <button class="layout-action" id="downloadImageBtn" style="margin-top:10px;">
+            <span class="btn-ico">⬇</span> <span>Download Map Image (PNG)</span>
+          </button>
+          <div style="color:var(--text-dim);font-size:10px;margin-top:6px;line-height:1.5;">
+            Renders the full map at high resolution. Good for sharing in Discord.
+          </div>
+        </div>
       </div>
     </aside>
 
@@ -940,6 +1054,9 @@
       <span id="moveBannerText">MOVE MODE · TAP A CASTLE</span>
       <button class="mb-exit" id="moveBannerExit">DONE</button>
     </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
   </div>
 </div>
 
@@ -1353,10 +1470,60 @@
     return          { fill: '#0d3524', edge: '#1e4a38', text: '#8bb89d', glow: '' };
   }
 
-  // Pick the right color based on what data is available
+  // Brightness metric: 'auto' (score then power), 'score' (only score, grey if missing), 'power' (only power)
+  const METRIC_KEY = 'beartrap_metric';
+  let brightnessMetric = 'auto';
+  try {
+    const stored = localStorage.getItem(METRIC_KEY);
+    if (stored === 'auto' || stored === 'score' || stored === 'power') brightnessMetric = stored;
+  } catch (e) { /* private mode etc. */ }
+
+  // Pick the right color based on the active metric
   function castleColor(player) {
+    if (brightnessMetric === 'score') {
+      return scoreColor(player.avg_score);  // null → grey
+    }
+    if (brightnessMetric === 'power') {
+      return powerColor(player.power);
+    }
+    // auto
     if (player.avg_score != null) return scoreColor(player.avg_score);
     return powerColor(player.power);
+  }
+
+  function setBrightnessMetric(m) {
+    if (m !== 'auto' && m !== 'score' && m !== 'power') return;
+    brightnessMetric = m;
+    try { localStorage.setItem(METRIC_KEY, m); } catch (e) {}
+    updateMetricUI();
+    requestDraw();
+  }
+
+  function updateMetricUI() {
+    document.querySelectorAll('[data-metric]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.metric === brightnessMetric);
+    });
+    // Show/hide the matching scale legend
+    const sScore = document.getElementById('scaleScore');
+    const sPower = document.getElementById('scalePower');
+    const hint = document.getElementById('scaleHint');
+    if (sScore && sPower && hint) {
+      if (brightnessMetric === 'power') {
+        sScore.style.display = 'none';
+        sPower.style.display = '';
+        hint.textContent = 'All castles colored by raw chief power.';
+      } else if (brightnessMetric === 'score') {
+        sScore.style.display = '';
+        sPower.style.display = 'none';
+        const withScore = (MAP.players || []).filter(p => p.avg_score != null).length;
+        hint.textContent = `Only the ${withScore} players with measured BT scores are colored. Others appear grey.`;
+      } else {
+        sScore.style.display = '';
+        sPower.style.display = 'none';
+        const withScore = (MAP.players || []).filter(p => p.avg_score != null).length;
+        hint.textContent = `★ uses measured BT score (${withScore} players). Power scale used as fallback for the rest.`;
+      }
+    }
   }
 
   function formatPower(p) {
@@ -1365,6 +1532,19 @@
     if (p >= 1e6) return (p / 1e6).toFixed(1) + 'M';
     if (p >= 1e3) return (p / 1e3).toFixed(1) + 'K';
     return String(p);
+  }
+
+  // Label inside a castle: respects the active brightness metric
+  function castleValueLabel(player) {
+    if (brightnessMetric === 'score') {
+      return player.avg_score != null ? `★ ${formatPower(player.avg_score)}` : '';
+    }
+    if (brightnessMetric === 'power') {
+      return player.power != null ? formatPower(player.power) : '';
+    }
+    // auto
+    if (player.avg_score != null) return `★ ${formatPower(player.avg_score)}`;
+    return player.power != null ? formatPower(player.power) : '';
   }
 
   // --- State ---
@@ -1675,14 +1855,15 @@
           const maxChars = Math.floor((fp - pad * 2) / (fp * 0.075));
           if (label.length > maxChars) label = label.slice(0, Math.max(3, maxChars - 1)) + '…';
           ctx.fillText(label, x + fp / 2, y + fp * 0.4);
-          if (fp >= 54 && (p.power != null || p.avg_score != null)) {
-            ctx.fillStyle = col.text;
-            ctx.globalAlpha = (dim ? 0.25 : 0.85);
-            ctx.font = `500 ${Math.min(10, fp * 0.11)}px "JetBrains Mono", monospace`;
-            // Prefer avg_score (more relevant), with ★ marker; else power
-            const display = p.avg_score != null ? `★ ${formatPower(p.avg_score)}` : formatPower(p.power);
-            ctx.fillText(display, x + fp / 2, y + fp * 0.65);
-            ctx.globalAlpha = dim ? 0.25 : 1;
+          if (fp >= 54) {
+            const display = castleValueLabel(p);
+            if (display) {
+              ctx.fillStyle = col.text;
+              ctx.globalAlpha = (dim ? 0.25 : 0.85);
+              ctx.font = `500 ${Math.min(10, fp * 0.11)}px "JetBrains Mono", monospace`;
+              ctx.fillText(display, x + fp / 2, y + fp * 0.65);
+              ctx.globalAlpha = dim ? 0.25 : 1;
+            }
           }
           if (fp >= 60 && p.furnace) {
             ctx.fillStyle = 'rgba(0,0,0,0.45)';
@@ -2277,6 +2458,464 @@
     }
   });
 
+  // ---- Toast ----
+  function toast(message, kind = 'info', duration = 2600) {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    const titles = { info: 'Notice', success: 'Done', error: 'Error' };
+    el.className = 'toast toast-' + kind;
+    el.innerHTML = `<div class="toast-title">${titles[kind] || 'Notice'}</div>${message}`;
+    requestAnimationFrame(() => el.classList.add('show'));
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+      el.classList.remove('show');
+    }, duration);
+  }
+
+  // ---- Export layout ----
+  document.getElementById('exportLayoutBtn').addEventListener('click', () => {
+    // Build a portable snapshot: each player's name and current position.
+    // Match by name on import (positions array order isn't reliable across different sources).
+    const snapshot = {
+      format: 'beartrap-layout',
+      version: 1,
+      saved_at: new Date().toISOString(),
+      layout: currentLayout,
+      alliance: 'BBL',
+      state: 3174,
+      player_count: MAP.players.length,
+      players: MAP.players.map(p => ({
+        name: p.map_name,
+        full_name: p.matched ? p.full_name : null,
+        original: [p.grid_row, p.grid_col],
+        position: [p.current_row, p.current_col],
+      })),
+    };
+    const moves = MAP.players.filter(p =>
+      p.current_row !== p.grid_row || p.current_col !== p.grid_col).length;
+    snapshot.moves = moves;
+
+    const json = JSON.stringify(snapshot, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    a.download = `beartrap_${currentLayout}_${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+    toast(`Exported ${currentLayout} layout (${moves} moves)`, 'success');
+  });
+
+  // ---- Import layout ----
+  document.getElementById('importLayoutBtn').addEventListener('click', () => {
+    document.getElementById('importLayoutFile').click();
+  });
+
+  document.getElementById('importLayoutFile').addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        applyImportedLayout(data);
+      } catch (err) {
+        toast('Could not parse file: ' + err.message, 'error', 4000);
+      }
+      // Reset input so same file can be re-imported
+      e.target.value = '';
+    };
+    reader.onerror = () => toast('Could not read file', 'error');
+    reader.readAsText(file);
+  });
+
+  function applyImportedLayout(data) {
+    // Validation
+    if (!data || typeof data !== 'object') {
+      return toast('Invalid file format', 'error', 4000);
+    }
+    if (data.format !== 'beartrap-layout') {
+      return toast('Not a beartrap layout file', 'error', 4000);
+    }
+    if (!Array.isArray(data.players) || data.players.length === 0) {
+      return toast('No player data in file', 'error', 4000);
+    }
+
+    // Match imported entries to current players. Original position is the most reliable
+    // identity (unique per player, doesn't drift), with name as a fallback for older
+    // exports that don't have `original`.
+    const importByOrig = new Map();   // "row,col" -> {name, position}
+    const importByName = new Map();   // fallback if no original
+    for (const p of data.players) {
+      if (!Array.isArray(p.position) || p.position.length !== 2) continue;
+      const [r, c] = p.position;
+      if (typeof r !== 'number' || typeof c !== 'number') continue;
+      if (r < 0 || r + 2 > MAP.rows || c < 0 || c + 2 > MAP.cols) continue;
+      if (Array.isArray(p.original) && p.original.length === 2) {
+        importByOrig.set(`${p.original[0]},${p.original[1]}`, p.position);
+      } else if (p.name) {
+        // legacy/older export — best-effort name match
+        if (!importByName.has(p.name)) importByName.set(p.name, p.position);
+      }
+    }
+
+    if (importByOrig.size === 0 && importByName.size === 0) {
+      return toast('No valid positions in file', 'error', 4000);
+    }
+
+    // Build the new layout
+    const newPositions = MAP.players.map(p => [p.current_row, p.current_col]);
+    let matched = 0, unmatched = 0;
+    for (let i = 0; i < MAP.players.length; i++) {
+      const p = MAP.players[i];
+      const origKey = `${p.grid_row},${p.grid_col}`;
+      let pos = importByOrig.get(origKey);
+      if (!pos) pos = importByName.get(p.map_name);
+      if (pos) {
+        newPositions[i] = pos;
+        matched++;
+      } else {
+        unmatched++;
+      }
+    }
+
+    if (matched === 0) {
+      return toast('No players in this file matched the current map', 'error', 4500);
+    }
+
+    // Validate the new layout: no two players overlap, none on terrain/buildings
+    const seenPos = new Map();
+    const conflicts = [];
+    for (let i = 0; i < newPositions.length; i++) {
+      const [r, c] = newPositions[i];
+      // Footprint check (2×2)
+      for (let dr = 0; dr < 2; dr++) {
+        for (let dc = 0; dc < 2; dc++) {
+          const key = `${r+dr},${c+dc}`;
+          if (seenPos.has(key)) {
+            const otherIdx = seenPos.get(key);
+            conflicts.push(`${MAP.players[i].map_name} overlaps ${MAP.players[otherIdx].map_name}`);
+          } else {
+            seenPos.set(key, i);
+          }
+          const t = MAP.terrain[r+dr] && MAP.terrain[r+dr][c+dc];
+          if (t === 'mountain' || t === 'water') {
+            conflicts.push(`${MAP.players[i].map_name} on ${t}`);
+          }
+        }
+      }
+      for (const img of MAP.images) {
+        const isz = img.size || 1;
+        if (r < img.grid_row + isz && r + 2 > img.grid_row &&
+            c < img.grid_col + isz && c + 2 > img.grid_col) {
+          conflicts.push(`${MAP.players[i].map_name} overlaps ${img.type}`);
+          break;
+        }
+      }
+    }
+
+    if (conflicts.length > 0) {
+      // Dedupe conflicts (one per pair)
+      const unique = [...new Set(conflicts)];
+      const preview = unique.slice(0, 3).join('; ') + (unique.length > 3 ? ` (+${unique.length - 3} more)` : '');
+      return toast('Import has conflicts: ' + preview, 'error', 6000);
+    }
+
+    // Apply
+    customPositions = newPositions;
+    for (let i = 0; i < MAP.players.length; i++) {
+      MAP.players[i].current_row = newPositions[i][0];
+      MAP.players[i].current_col = newPositions[i][1];
+    }
+    currentLayout = 'custom';
+    saveCustomToStorage();
+    updateLayoutChips();
+    updateMovedBadge();
+    recomputeChains();
+    recomputeLayoutHasMoves();
+    requestDraw();
+
+    let msg = `Imported layout: ${matched} players placed`;
+    if (unmatched > 0) msg += `, ${unmatched} kept in place`;
+    toast(msg, 'success', 3500);
+  }
+
+  // ---- Download map image ----
+  document.getElementById('downloadImageBtn').addEventListener('click', () => {
+    downloadMapImage();
+  });
+
+  function downloadMapImage() {
+    // Render full map to an off-screen canvas at high resolution.
+    // Cell size is base 32px; multiply by 3 for crisp output (96px per tile).
+    const SCALE = 3;
+    const cell = 32 * SCALE;
+    const padTop = 80 * SCALE;
+    const padBottom = 40 * SCALE;
+    const padSide = 40 * SCALE;
+    const w = MAP.cols * cell + padSide * 2;
+    const h = MAP.rows * cell + padTop + padBottom;
+
+    const off = document.createElement('canvas');
+    off.width = w; off.height = h;
+    const c = off.getContext('2d');
+
+    // Background
+    const bgGrad = c.createLinearGradient(0, 0, 0, h);
+    bgGrad.addColorStop(0, '#05080d');
+    bgGrad.addColorStop(1, '#020406');
+    c.fillStyle = bgGrad;
+    c.fillRect(0, 0, w, h);
+
+    // Title bar
+    c.fillStyle = '#0a1018';
+    c.fillRect(0, 0, w, padTop);
+    c.fillStyle = '#1e2d3e';
+    c.fillRect(0, padTop - 2, w, 2);
+
+    // Title text
+    c.fillStyle = '#d9f2ff';
+    c.font = `900 ${28 * SCALE}px "Orbitron", "Arial Black", sans-serif`;
+    c.textBaseline = 'middle';
+    c.textAlign = 'left';
+    c.fillText('SvS BEAR TRAP', padSide, padTop / 2 - 6 * SCALE);
+
+    c.fillStyle = '#7a8c9a';
+    c.font = `${10 * SCALE}px "JetBrains Mono", monospace`;
+    const layoutLabel = currentLayout.toUpperCase();
+    const moveCount = MAP.players.filter(p =>
+      p.current_row !== p.grid_row || p.current_col !== p.grid_col).length;
+    const sub = `STATE 3174 · BBL · ${layoutLabel}` +
+                (moveCount > 0 ? ` · ${moveCount} MOVED` : '') +
+                ` · ${new Date().toISOString().slice(0,10)}`;
+    c.fillText(sub, padSide, padTop / 2 + 14 * SCALE);
+
+    // Helper for drawing terrain at scale
+    const ox = padSide;
+    const oy = padTop;
+
+    function drawMountainExp(x, y, s) {
+      const g = c.createLinearGradient(x, y, x + s, y + s);
+      g.addColorStop(0, '#4a5561'); g.addColorStop(0.55, '#333b45'); g.addColorStop(1, '#20272f');
+      c.fillStyle = g;
+      c.fillRect(x, y, s, s);
+      c.fillStyle = 'rgba(0,0,0,0.25)';
+      c.beginPath();
+      c.moveTo(x, y + s);
+      c.lineTo(x + s * 0.45, y + s * 0.2);
+      c.lineTo(x + s * 0.7, y + s);
+      c.closePath(); c.fill();
+      c.fillStyle = 'rgba(255,255,255,0.05)';
+      c.beginPath();
+      c.moveTo(x + s * 0.3, y + s);
+      c.lineTo(x + s * 0.65, y + s * 0.4);
+      c.lineTo(x + s, y + s);
+      c.closePath(); c.fill();
+      c.fillStyle = 'rgba(217, 242, 255, 0.3)';
+      c.beginPath();
+      c.moveTo(x + s * 0.42, y + s * 0.28);
+      c.lineTo(x + s * 0.48, y + s * 0.2);
+      c.lineTo(x + s * 0.54, y + s * 0.28);
+      c.closePath(); c.fill();
+    }
+    function drawWaterExp(x, y, s) {
+      const g = c.createLinearGradient(x, y, x, y + s);
+      g.addColorStop(0, '#5a95c0'); g.addColorStop(1, '#305a7a');
+      c.fillStyle = g;
+      c.fillRect(x, y, s, s);
+      c.strokeStyle = 'rgba(217, 242, 255, 0.18)';
+      c.lineWidth = Math.max(0.6, s * 0.04);
+      c.beginPath();
+      c.moveTo(x + s * 0.15, y + s * 0.35);
+      c.quadraticCurveTo(x + s * 0.5, y + s * 0.2, x + s * 0.85, y + s * 0.35);
+      c.stroke();
+      c.beginPath();
+      c.moveTo(x + s * 0.2, y + s * 0.7);
+      c.quadraticCurveTo(x + s * 0.55, y + s * 0.55, x + s * 0.9, y + s * 0.7);
+      c.stroke();
+    }
+
+    // Render map base
+    c.fillStyle = '#0c1218';
+    c.fillRect(ox, oy, MAP.cols * cell, MAP.rows * cell);
+    for (let r = 0; r < MAP.rows; r++) {
+      for (let col = 0; col < MAP.cols; col++) {
+        const t = MAP.terrain[r][col];
+        const x = ox + col * cell;
+        const y = oy + r * cell;
+        if (t === 'mountain') drawMountainExp(x, y, cell);
+        else if (t === 'water') drawWaterExp(x, y, cell);
+        else { c.fillStyle = '#12181f'; c.fillRect(x, y, cell, cell); }
+      }
+    }
+
+    // Grid lines (subtle)
+    c.strokeStyle = 'rgba(127, 209, 255, 0.06)';
+    c.lineWidth = 1;
+    c.beginPath();
+    for (let col = 0; col <= MAP.cols; col++) {
+      const x = Math.round(ox + col * cell) + 0.5;
+      c.moveTo(x, oy);
+      c.lineTo(x, oy + MAP.rows * cell);
+    }
+    for (let r = 0; r <= MAP.rows; r++) {
+      const y = Math.round(oy + r * cell) + 0.5;
+      c.moveTo(ox, y);
+      c.lineTo(ox + MAP.cols * cell, y);
+    }
+    c.stroke();
+
+    // Coordinate ruler labels (every 5)
+    c.fillStyle = 'rgba(127, 209, 255, 0.6)';
+    c.font = `${10 * SCALE}px "JetBrains Mono", monospace`;
+    c.textAlign = 'center';
+    c.textBaseline = 'bottom';
+    for (let col = 0; col < MAP.cols; col++) {
+      const gx = MAP.x_coords[col];
+      if (gx % 5 === 0) {
+        c.fillText(String(gx), ox + (col + 0.5) * cell, oy - 6 * SCALE);
+      }
+    }
+    c.textAlign = 'right';
+    c.textBaseline = 'middle';
+    for (let r = 0; r < MAP.rows; r++) {
+      const gy = MAP.y_coords[r];
+      if (gy % 5 === 0) {
+        c.fillText(String(gy), ox - 6 * SCALE, oy + (r + 0.5) * cell);
+      }
+    }
+
+    // Players
+    for (let i = 0; i < MAP.players.length; i++) {
+      const p = MAP.players[i];
+      const x = ox + p.current_col * cell;
+      const y = oy + p.current_row * cell;
+      const fp = 2 * cell;
+      const col = castleColor(p);
+
+      if (col.glow) {
+        c.shadowColor = col.glow;
+        c.shadowBlur = 8 * SCALE;
+      }
+      c.fillStyle = col.fill;
+      c.fillRect(x + 1, y + 1, fp - 2, fp - 2);
+      c.shadowBlur = 0;
+
+      const grad = c.createLinearGradient(x, y, x, y + fp);
+      grad.addColorStop(0, 'rgba(255,255,255,0.08)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.25)');
+      c.fillStyle = grad;
+      c.fillRect(x + 1, y + 1, fp - 2, fp - 2);
+
+      c.strokeStyle = col.edge;
+      c.lineWidth = 1 * SCALE;
+      c.strokeRect(x + 1.5, y + 1.5, fp - 3, fp - 3);
+
+      if (!p.matched) {
+        c.strokeStyle = 'rgba(255, 138, 76, 0.7)';
+        c.lineWidth = 1.5 * SCALE;
+        c.setLineDash([4 * SCALE, 4 * SCALE]);
+        c.strokeRect(x + 2, y + 2, fp - 4, fp - 4);
+        c.setLineDash([]);
+      }
+
+      // Moved indicator with chain color
+      const isMoved = (p.current_row !== p.grid_row || p.current_col !== p.grid_col);
+      if (isMoved) {
+        const cc = chainColor(chainsByPlayer[i]) || CHAIN_COLORS[0];
+        c.strokeStyle = cc.stroke;
+        c.lineWidth = 2 * SCALE;
+        c.shadowColor = cc.stroke;
+        c.shadowBlur = 5 * SCALE;
+        c.strokeRect(x + 0.5, y + 0.5, fp - 1, fp - 1);
+        c.shadowBlur = 0;
+        c.fillStyle = cc.stroke;
+        c.beginPath();
+        c.moveTo(x + 1, y + 1);
+        c.lineTo(x + fp * 0.22, y + 1);
+        c.lineTo(x + 1, y + fp * 0.22);
+        c.closePath(); c.fill();
+      }
+
+      // Name
+      c.fillStyle = col.text;
+      c.font = `600 ${11 * SCALE}px "JetBrains Mono", monospace`;
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      let label = p.map_name;
+      if (label.length > 14) label = label.slice(0, 13) + '…';
+      c.fillText(label, x + fp / 2, y + fp * 0.4);
+
+      // Score / power (respects active brightness metric)
+      const display = castleValueLabel(p);
+      if (display) {
+        c.font = `500 ${10 * SCALE}px "JetBrains Mono", monospace`;
+        c.globalAlpha = 0.85;
+        c.fillText(display, x + fp / 2, y + fp * 0.65);
+        c.globalAlpha = 1;
+      }
+
+      // Furnace chip
+      if (p.furnace) {
+        c.fillStyle = 'rgba(0,0,0,0.45)';
+        c.fillRect(x + fp - fp * 0.35, y + 2, fp * 0.33, fp * 0.19);
+        c.fillStyle = col.text;
+        c.font = `600 ${8 * SCALE}px "JetBrains Mono", monospace`;
+        c.fillText(p.furnace, x + fp - fp * 0.35 + fp * 0.33 / 2, y + 2 + fp * 0.1);
+      }
+    }
+
+    // Buildings (images) on top of player castles
+    const renderOrder = [...MAP.images].sort((a, b) => (b.size || 1) - (a.size || 1));
+    let pendingImages = renderOrder.length;
+    for (const im of renderOrder) {
+      const x = ox + im.grid_col * cell;
+      const y = oy + im.grid_row * cell;
+      const sz = im.size || 1;
+      const fp = sz * cell;
+      const img = loadedImgs[im.type];
+      if (img) {
+        const pad = fp * 0.04;
+        c.drawImage(img, x + pad, y + pad, fp - pad * 2, fp - pad * 2);
+      }
+    }
+
+    // Frame border
+    c.strokeStyle = 'rgba(127, 209, 255, 0.35)';
+    c.lineWidth = 1.5 * SCALE;
+    c.strokeRect(ox - 1, oy - 1, MAP.cols * cell + 2, MAP.rows * cell + 2);
+
+    // Footer
+    c.fillStyle = '#7a8c9a';
+    c.font = `${9 * SCALE}px "JetBrains Mono", monospace`;
+    c.textAlign = 'right';
+    c.textBaseline = 'bottom';
+    c.fillText(`X: 690→636 · Y: 405→369`, ox + MAP.cols * cell, h - 12 * SCALE);
+    c.textAlign = 'left';
+    c.fillText(`${MAP.players.length} players · ${MAP.images.length} structures`, ox, h - 12 * SCALE);
+
+    // Trigger download
+    off.toBlob((blob) => {
+      if (!blob) {
+        toast('Could not generate image', 'error');
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      a.download = `beartrap_map_${currentLayout}_${stamp}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 100);
+      toast(`Downloaded ${off.width}×${off.height} PNG`, 'success');
+    }, 'image/png');
+  }
+
   // Update layout chip visuals & custom availability
   (function updateCustomBtn() {
     const btn = document.getElementById('customLayoutBtn');
@@ -2305,6 +2944,12 @@
     }
     el.textContent = `${cnt} moves`;
   })();
+
+  // Brightness-metric toggle buttons
+  document.querySelectorAll('[data-metric]').forEach(btn => {
+    btn.addEventListener('click', () => setBrightnessMetric(btn.dataset.metric));
+  });
+  updateMetricUI();
 
   // Open legend by default on first load if there's room
   if (window.matchMedia('(min-width: 900px)').matches) {
