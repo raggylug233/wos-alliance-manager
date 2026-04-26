@@ -1,0 +1,1080 @@
+{
+  "format": "beartrap-layout",
+  "version": 1,
+  "saved_at": "2026-04-25T05:03:59.562Z",
+  "layout": "custom",
+  "alliance": "BBL",
+  "state": 3174,
+  "player_count": 89,
+  "players": [
+    {
+      "name": "Mila",
+      "full_name": "Mila",
+      "original": [
+        8,
+        29
+      ],
+      "position": [
+        23,
+        36
+      ]
+    },
+    {
+      "name": "Bella Beauty",
+      "full_name": "Bella beauty",
+      "original": [
+        9,
+        31
+      ],
+      "position": [
+        9,
+        31
+      ]
+    },
+    {
+      "name": "Командир=Малик",
+      "full_name": "Командир÷Малик",
+      "original": [
+        9,
+        34
+      ],
+      "position": [
+        9,
+        34
+      ]
+    },
+    {
+      "name": "Atherion",
+      "full_name": "Atheríon",
+      "original": [
+        9,
+        36
+      ],
+      "position": [
+        9,
+        36
+      ]
+    },
+    {
+      "name": "Coobra",
+      "full_name": "Coobra",
+      "original": [
+        9,
+        38
+      ],
+      "position": [
+        19,
+        38
+      ]
+    },
+    {
+      "name": "Fatemeh333",
+      "full_name": "Fatemeh333",
+      "original": [
+        9,
+        40
+      ],
+      "position": [
+        9,
+        40
+      ]
+    },
+    {
+      "name": "vlado",
+      "full_name": "vlado",
+      "original": [
+        9,
+        42
+      ],
+      "position": [
+        9,
+        42
+      ]
+    },
+    {
+      "name": "Suro",
+      "full_name": "Suro",
+      "original": [
+        11,
+        11
+      ],
+      "position": [
+        11,
+        11
+      ]
+    },
+    {
+      "name": "Mini Joemama",
+      "full_name": "mini joemama",
+      "original": [
+        11,
+        13
+      ],
+      "position": [
+        11,
+        13
+      ]
+    },
+    {
+      "name": "Catania",
+      "full_name": "Catania",
+      "original": [
+        11,
+        15
+      ],
+      "position": [
+        11,
+        15
+      ]
+    },
+    {
+      "name": "I La G",
+      "full_name": "i La G",
+      "original": [
+        11,
+        17
+      ],
+      "position": [
+        11,
+        17
+      ]
+    },
+    {
+      "name": "Team Petit Four",
+      "full_name": "Team Petit Four",
+      "original": [
+        11,
+        19
+      ],
+      "position": [
+        11,
+        21
+      ]
+    },
+    {
+      "name": "Cele Moon",
+      "full_name": "Cele_Moon 문",
+      "original": [
+        11,
+        21
+      ],
+      "position": [
+        13,
+        21
+      ]
+    },
+    {
+      "name": "WeHaveCandy ツ",
+      "full_name": "WeHaveCandy ツ",
+      "original": [
+        11,
+        23
+      ],
+      "position": [
+        11,
+        23
+      ]
+    },
+    {
+      "name": "MoonRising",
+      "full_name": "MoonRising",
+      "original": [
+        11,
+        29
+      ],
+      "position": [
+        17,
+        30
+      ]
+    },
+    {
+      "name": "Asia",
+      "full_name": "Asia",
+      "original": [
+        11,
+        31
+      ],
+      "position": [
+        11,
+        31
+      ]
+    },
+    {
+      "name": "ESPARTACO",
+      "full_name": "ESPARTACO",
+      "original": [
+        11,
+        34
+      ],
+      "position": [
+        11,
+        34
+      ]
+    },
+    {
+      "name": "Joemama",
+      "full_name": "joemama",
+      "original": [
+        11,
+        36
+      ],
+      "position": [
+        11,
+        36
+      ]
+    },
+    {
+      "name": "Yamakasi",
+      "full_name": "Yamakasi",
+      "original": [
+        11,
+        38
+      ],
+      "position": [
+        11,
+        38
+      ]
+    },
+    {
+      "name": "YUSIF",
+      "full_name": "YUSif",
+      "original": [
+        11,
+        40
+      ],
+      "position": [
+        11,
+        40
+      ]
+    },
+    {
+      "name": "Crazy",
+      "full_name": "Crazy",
+      "original": [
+        11,
+        42
+      ],
+      "position": [
+        11,
+        42
+      ]
+    },
+    {
+      "name": "WeLoveCandy ツ",
+      "full_name": "WeLoveCandy ツ",
+      "original": [
+        12,
+        25
+      ],
+      "position": [
+        13,
+        25
+      ]
+    },
+    {
+      "name": "King Tobias",
+      "full_name": "KingTobias",
+      "original": [
+        13,
+        12
+      ],
+      "position": [
+        13,
+        12
+      ]
+    },
+    {
+      "name": "ATM Sargent",
+      "full_name": "장병장 ATM sergeant",
+      "original": [
+        13,
+        15
+      ],
+      "position": [
+        15,
+        15
+      ]
+    },
+    {
+      "name": "Mimin",
+      "full_name": "mimin",
+      "original": [
+        13,
+        17
+      ],
+      "position": [
+        13,
+        17
+      ]
+    },
+    {
+      "name": "ElSolDeMexico",
+      "full_name": "ElSolDeMexico",
+      "original": [
+        13,
+        19
+      ],
+      "position": [
+        17,
+        15
+      ]
+    },
+    {
+      "name": "Fangs of Willow",
+      "full_name": "Fangs of Willow",
+      "original": [
+        13,
+        21
+      ],
+      "position": [
+        11,
+        19
+      ]
+    },
+    {
+      "name": "Lord of North",
+      "full_name": "Lord of North",
+      "original": [
+        13,
+        23
+      ],
+      "position": [
+        13,
+        23
+      ]
+    },
+    {
+      "name": "jojo le rigolo",
+      "full_name": "jojo le rigolo",
+      "original": [
+        13,
+        30
+      ],
+      "position": [
+        13,
+        30
+      ]
+    },
+    {
+      "name": "8SMITTY8",
+      "full_name": "8SMITTY8",
+      "original": [
+        13,
+        32
+      ],
+      "position": [
+        13,
+        32
+      ]
+    },
+    {
+      "name": "LE RAT CANAM",
+      "full_name": "LE RAT CANAM",
+      "original": [
+        13,
+        34
+      ],
+      "position": [
+        13,
+        34
+      ]
+    },
+    {
+      "name": "Chytras",
+      "full_name": "Chytras",
+      "original": [
+        13,
+        36
+      ],
+      "position": [
+        13,
+        36
+      ]
+    },
+    {
+      "name": "oday",
+      "full_name": "oday",
+      "original": [
+        13,
+        38
+      ],
+      "position": [
+        13,
+        38
+      ]
+    },
+    {
+      "name": "SOFIA",
+      "full_name": "SΦFIA",
+      "original": [
+        13,
+        40
+      ],
+      "position": [
+        17,
+        32
+      ]
+    },
+    {
+      "name": "lulu_ghz",
+      "full_name": "Lulu_ghz",
+      "original": [
+        13,
+        42
+      ],
+      "position": [
+        13,
+        42
+      ]
+    },
+    {
+      "name": "Meowriffic",
+      "full_name": "シ╋MEOWRYFFIC╋シ",
+      "original": [
+        15,
+        13
+      ],
+      "position": [
+        15,
+        13
+      ]
+    },
+    {
+      "name": "RedRoseNaka",
+      "full_name": "RedRoseNaka",
+      "original": [
+        15,
+        15
+      ],
+      "position": [
+        13,
+        19
+      ]
+    },
+    {
+      "name": "Sassy",
+      "full_name": "Sassy",
+      "original": [
+        15,
+        17
+      ],
+      "position": [
+        15,
+        17
+      ]
+    },
+    {
+      "name": "Fangs of Maple",
+      "full_name": "Fangs of Maple",
+      "original": [
+        15,
+        19
+      ],
+      "position": [
+        15,
+        19
+      ]
+    },
+    {
+      "name": "Team Biscuit",
+      "full_name": "Team Biscuit",
+      "original": [
+        15,
+        21
+      ],
+      "position": [
+        15,
+        21
+      ]
+    },
+    {
+      "name": "xMAUIx",
+      "full_name": "xMAUlx",
+      "original": [
+        15,
+        23
+      ],
+      "position": [
+        15,
+        23
+      ]
+    },
+    {
+      "name": "LMX",
+      "full_name": "LMX",
+      "original": [
+        15,
+        25
+      ],
+      "position": [
+        15,
+        25
+      ]
+    },
+    {
+      "name": "Dadan",
+      "full_name": null,
+      "original": [
+        15,
+        27
+      ],
+      "position": [
+        15,
+        27
+      ]
+    },
+    {
+      "name": "Core",
+      "full_name": "Core",
+      "original": [
+        15,
+        30
+      ],
+      "position": [
+        15,
+        40
+      ]
+    },
+    {
+      "name": "LilAnfe",
+      "full_name": "LilAnfe",
+      "original": [
+        15,
+        32
+      ],
+      "position": [
+        15,
+        30
+      ]
+    },
+    {
+      "name": "Kit_Kat",
+      "full_name": "Kit_Kat",
+      "original": [
+        15,
+        34
+      ],
+      "position": [
+        15,
+        34
+      ]
+    },
+    {
+      "name": "Hirua",
+      "full_name": "Hirua",
+      "original": [
+        15,
+        40
+      ],
+      "position": [
+        19,
+        34
+      ]
+    },
+    {
+      "name": "Kaplan",
+      "full_name": "Kaplan",
+      "original": [
+        15,
+        42
+      ],
+      "position": [
+        15,
+        42
+      ]
+    },
+    {
+      "name": "Auntie Bear",
+      "full_name": "Aunty bear",
+      "original": [
+        17,
+        13
+      ],
+      "position": [
+        13,
+        15
+      ]
+    },
+    {
+      "name": "Dobbinator",
+      "full_name": "Dobbinater",
+      "original": [
+        17,
+        15
+      ],
+      "position": [
+        17,
+        23
+      ]
+    },
+    {
+      "name": "Raggylug",
+      "full_name": "Raggylug",
+      "original": [
+        17,
+        21
+      ],
+      "position": [
+        17,
+        21
+      ]
+    },
+    {
+      "name": "3165Legend",
+      "full_name": "#3165Legend",
+      "original": [
+        17,
+        23
+      ],
+      "position": [
+        25,
+        19
+      ]
+    },
+    {
+      "name": "Mini Raggylug",
+      "full_name": "Mini Raggylug",
+      "original": [
+        17,
+        25
+      ],
+      "position": [
+        17,
+        25
+      ]
+    },
+    {
+      "name": "SANCAK",
+      "full_name": "SANCAK",
+      "original": [
+        17,
+        32
+      ],
+      "position": [
+        9,
+        38
+      ]
+    },
+    {
+      "name": "Interstellar",
+      "full_name": "Interstellar",
+      "original": [
+        17,
+        34
+      ],
+      "position": [
+        17,
+        34
+      ]
+    },
+    {
+      "name": "PsyPat",
+      "full_name": "PsyPat",
+      "original": [
+        17,
+        40
+      ],
+      "position": [
+        17,
+        40
+      ]
+    },
+    {
+      "name": "Den",
+      "full_name": "Den",
+      "original": [
+        17,
+        42
+      ],
+      "position": [
+        21,
+        36
+      ]
+    },
+    {
+      "name": "Morghul",
+      "full_name": "Morghul",
+      "original": [
+        19,
+        11
+      ],
+      "position": [
+        19,
+        11
+      ]
+    },
+    {
+      "name": "VICTØR SNOW",
+      "full_name": "VICTØR SNØW",
+      "original": [
+        19,
+        15
+      ],
+      "position": [
+        19,
+        15
+      ]
+    },
+    {
+      "name": "Guru Master",
+      "full_name": "Guru_Master",
+      "original": [
+        19,
+        21
+      ],
+      "position": [
+        19,
+        21
+      ]
+    },
+    {
+      "name": "Middletonia",
+      "full_name": "Middletonia",
+      "original": [
+        19,
+        23
+      ],
+      "position": [
+        19,
+        23
+      ]
+    },
+    {
+      "name": "Frameher",
+      "full_name": "frameher",
+      "original": [
+        19,
+        25
+      ],
+      "position": [
+        21,
+        19
+      ]
+    },
+    {
+      "name": "Suro",
+      "full_name": "Suro",
+      "original": [
+        19,
+        28
+      ],
+      "position": [
+        19,
+        28
+      ]
+    },
+    {
+      "name": "Manabeille",
+      "full_name": "Manabeille",
+      "original": [
+        19,
+        32
+      ],
+      "position": [
+        19,
+        32
+      ]
+    },
+    {
+      "name": "Ozzy",
+      "full_name": "Ozzy",
+      "original": [
+        19,
+        34
+      ],
+      "position": [
+        15,
+        32
+      ]
+    },
+    {
+      "name": "Parry Hotter",
+      "full_name": "Parry Hotter",
+      "original": [
+        19,
+        36
+      ],
+      "position": [
+        19,
+        36
+      ]
+    },
+    {
+      "name": "Ilvy",
+      "full_name": "ılvy",
+      "original": [
+        19,
+        38
+      ],
+      "position": [
+        13,
+        40
+      ]
+    },
+    {
+      "name": "Lina",
+      "full_name": "Lïna",
+      "original": [
+        19,
+        40
+      ],
+      "position": [
+        19,
+        40
+      ]
+    },
+    {
+      "name": "Reddyvetty",
+      "full_name": "Reddyvetty",
+      "original": [
+        19,
+        42
+      ],
+      "position": [
+        19,
+        42
+      ]
+    },
+    {
+      "name": "Sacrisoiri",
+      "full_name": "sacrisoiri",
+      "original": [
+        19,
+        44
+      ],
+      "position": [
+        17,
+        42
+      ]
+    },
+    {
+      "name": "Middletonia #2",
+      "full_name": "Middletonia #2",
+      "original": [
+        21,
+        11
+      ],
+      "position": [
+        21,
+        11
+      ]
+    },
+    {
+      "name": "Popcorn",
+      "full_name": null,
+      "original": [
+        21,
+        13
+      ],
+      "position": [
+        21,
+        13
+      ]
+    },
+    {
+      "name": "KaptainKurt",
+      "full_name": "Kaptain Kurt",
+      "original": [
+        21,
+        15
+      ],
+      "position": [
+        23,
+        19
+      ]
+    },
+    {
+      "name": "Kranky",
+      "full_name": "Kranky",
+      "original": [
+        21,
+        17
+      ],
+      "position": [
+        17,
+        13
+      ]
+    },
+    {
+      "name": "Boston",
+      "full_name": "Boston",
+      "original": [
+        21,
+        21
+      ],
+      "position": [
+        21,
+        21
+      ]
+    },
+    {
+      "name": "Moon Boy",
+      "full_name": "Moon_Boy",
+      "original": [
+        21,
+        23
+      ],
+      "position": [
+        21,
+        17
+      ]
+    },
+    {
+      "name": "Star Man",
+      "full_name": "StarMan",
+      "original": [
+        21,
+        25
+      ],
+      "position": [
+        25,
+        17
+      ]
+    },
+    {
+      "name": "Arwes",
+      "full_name": "Arwres",
+      "original": [
+        21,
+        38
+      ],
+      "position": [
+        21,
+        38
+      ]
+    },
+    {
+      "name": "Migu3l",
+      "full_name": "Migu3l",
+      "original": [
+        21,
+        40
+      ],
+      "position": [
+        21,
+        40
+      ]
+    },
+    {
+      "name": "Loonytunes",
+      "full_name": "Loonytoons",
+      "original": [
+        21,
+        42
+      ],
+      "position": [
+        21,
+        42
+      ]
+    },
+    {
+      "name": "Stefon1702",
+      "full_name": "Stefon1702",
+      "original": [
+        21,
+        44
+      ],
+      "position": [
+        19,
+        30
+      ]
+    },
+    {
+      "name": "Little Firefly",
+      "full_name": "Little Firefly",
+      "original": [
+        23,
+        15
+      ],
+      "position": [
+        23,
+        15
+      ]
+    },
+    {
+      "name": "Setsuna",
+      "full_name": "Setsuna",
+      "original": [
+        23,
+        17
+      ],
+      "position": [
+        23,
+        17
+      ]
+    },
+    {
+      "name": "Lady Flo",
+      "full_name": "Lady Flo",
+      "original": [
+        23,
+        19
+      ],
+      "position": [
+        21,
+        15
+      ]
+    },
+    {
+      "name": "Chichi",
+      "full_name": "Chichi",
+      "original": [
+        23,
+        21
+      ],
+      "position": [
+        23,
+        21
+      ]
+    },
+    {
+      "name": "Diony",
+      "full_name": "Diony",
+      "original": [
+        23,
+        23
+      ],
+      "position": [
+        23,
+        23
+      ]
+    },
+    {
+      "name": "Ozzy From Temu",
+      "full_name": "Ozzy from Temu",
+      "original": [
+        23,
+        25
+      ],
+      "position": [
+        23,
+        25
+      ]
+    },
+    {
+      "name": "Baby_Princess",
+      "full_name": "Baby_PRinceSs",
+      "original": [
+        25,
+        21
+      ],
+      "position": [
+        25,
+        21
+      ]
+    },
+    {
+      "name": "Boston 2",
+      "full_name": "Boston 2",
+      "original": [
+        25,
+        23
+      ],
+      "position": [
+        21,
+        25
+      ]
+    }
+  ],
+  "moves": 30
+}
