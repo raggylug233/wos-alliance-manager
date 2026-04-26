@@ -549,6 +549,184 @@
   .toast.toast-success .toast-title { color: #6aff7a; }
   .toast.toast-error .toast-title { color: var(--danger); }
 
+  /* ---------- Password modal ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(2, 4, 6, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+    padding: 20px;
+  }
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal {
+    background: rgba(14, 22, 32, 0.96);
+    border: 1px solid var(--panel-border);
+    border-top: 2px solid var(--frost);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7), 0 0 24px rgba(127, 209, 255, 0.12);
+    backdrop-filter: blur(10px);
+    padding: 22px 24px 18px;
+    max-width: 360px;
+    width: 100%;
+    transform: translateY(8px);
+    transition: transform 0.2s cubic-bezier(.2,.9,.25,1);
+  }
+  .modal-overlay.show .modal { transform: translateY(0); }
+  .modal-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ice);
+    margin-bottom: 4px;
+  }
+  .modal-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .modal-input {
+    width: 100%;
+    background: rgba(5, 8, 13, 0.85);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    padding: 10px 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    outline: none;
+    transition: border-color 0.15s;
+    box-sizing: border-box;
+  }
+  .modal-input:focus { border-color: var(--frost); }
+  .modal-err {
+    font-size: 10px;
+    color: var(--danger);
+    min-height: 14px;
+    margin-top: 6px;
+  }
+  .modal-actions {
+    display: flex; gap: 8px; justify-content: flex-end;
+    margin-top: 8px;
+  }
+  .modal-btn {
+    background: rgba(10, 16, 24, 0.7);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    padding: 8px 16px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .modal-btn:hover { border-color: var(--frost-dim); }
+  .modal-btn-cancel { color: var(--text-dim); }
+  .modal-btn-cancel:hover { color: var(--text); }
+  .modal-btn-ok {
+    color: var(--frost);
+    border-color: var(--frost-dim);
+    background: rgba(127, 209, 255, 0.08);
+  }
+  .modal-btn-ok:hover {
+    border-color: var(--frost);
+    background: rgba(127, 209, 255, 0.18);
+  }
+
+  /* ---------- Password modal ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(2, 5, 9, 0.72);
+    backdrop-filter: blur(4px);
+    z-index: 80;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.18s ease;
+    padding: 20px;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: auto; }
+  .modal {
+    background: rgba(14, 22, 32, 0.96);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--frost);
+    padding: 22px 22px 18px;
+    width: 100%; max-width: 340px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(127, 209, 255, 0.06);
+    transform: translateY(-8px) scale(0.98);
+    transition: transform 0.22s cubic-bezier(.2,.9,.25,1);
+  }
+  .modal-overlay.show .modal { transform: translateY(0) scale(1); }
+  .modal-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: var(--ice);
+    margin-bottom: 6px;
+  }
+  .modal-sub {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .modal-input {
+    width: 100%; box-sizing: border-box;
+    background: rgba(5, 10, 15, 0.85);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .modal-input:focus {
+    border-color: var(--frost);
+    box-shadow: 0 0 0 1px var(--frost-dim);
+  }
+  .modal-err {
+    color: var(--danger);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    min-height: 14px;
+    margin-top: 6px;
+  }
+  .modal-actions {
+    display: flex; gap: 8px; justify-content: flex-end;
+    margin-top: 12px;
+  }
+  .modal-btn {
+    background: transparent;
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    padding: 8px 16px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .modal-btn-cancel:hover {
+    border-color: var(--text-dim);
+    color: var(--text-dim);
+  }
+  .modal-btn-ok {
+    border-color: var(--frost-dim);
+    color: var(--frost);
+  }
+  .modal-btn-ok:hover {
+    background: rgba(127, 209, 255, 0.12);
+    border-color: var(--frost);
+  }
+
   .filters-list { padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }
   .filter-pill {
     background: rgba(10,16,24,0.6);
@@ -1057,6 +1235,20 @@
 
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
+
+    <!-- Password modal for Move Mode -->
+    <div class="modal-overlay" id="passwordModal">
+      <div class="modal">
+        <div class="modal-title">UNLOCK MOVE MODE</div>
+        <div class="modal-sub">Enter password to enable layout edits.</div>
+        <input type="password" id="passwordInput" class="modal-input" autocomplete="off" spellcheck="false" placeholder="Password">
+        <div class="modal-err" id="passwordErr"></div>
+        <div class="modal-actions">
+          <button class="modal-btn modal-btn-cancel" id="passwordCancel">CANCEL</button>
+          <button class="modal-btn modal-btn-ok" id="passwordOk">UNLOCK</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1343,20 +1535,213 @@
     }, 1500);
   }
 
-  // Bootstrap: try loading custom; fall back to original
+  // Bootstrap: load local state synchronously (so map renders immediately).
+  // Then async-fetch custom.json; if found & different, prompt to apply.
   const stored = loadCustomFromStorage();
-  if (stored && stored.positions) {
+  const hadLocalCustom = !!(stored && stored.positions);
+  if (hadLocalCustom) {
     customPositions = stored.positions;
     applyLayout(stored.layout === 'original' || stored.layout === 'optimized' ? stored.layout : 'custom');
   } else {
     applyLayout('original');
   }
 
+  // Async: try fetching custom.json from the same directory as this page.
+  // Only works when the page is served over HTTP (file:// + fetch is blocked in browsers).
+  // Fails silently if not reachable.
+  (async function tryFetchCustomJson() {
+    // Wait for initial render to settle so any prompt doesn't compete with first paint
+    await new Promise(r => setTimeout(r, 200));
+    let resp;
+    try {
+      // Cache-bust so users always see fresh file when alliance updates it
+      resp = await fetch('custom.json?_t=' + Date.now(), { cache: 'no-store' });
+    } catch (e) {
+      // Network/file:// error — fail silently
+      return;
+    }
+    if (!resp.ok) return;  // 404 etc. — silent
+
+    let data;
+    try {
+      data = await resp.json();
+    } catch (e) {
+      console.warn('custom.json malformed:', e.message);
+      return;
+    }
+    if (!data || data.format !== 'beartrap-layout') return;  // not our file
+
+    // Compute fetched positions keyed by current player index
+    const fetchedPositions = computeFetchedPositions(data);
+    if (!fetchedPositions) return;  // validation failed silently
+
+    if (hadLocalCustom) {
+      // Compare local vs fetched
+      const same = arePositionsEqual(customPositions, fetchedPositions);
+      if (same) return;  // already in sync, nothing to do
+
+      const localMoves = countMoveDelta(customPositions);
+      const fetchedMoves = countMoveDelta(fetchedPositions);
+      const ok = window.confirm(
+        `A shared layout file (custom.json) was found.\n\n` +
+        `• Your local edits: ${localMoves} moves\n` +
+        `• Shared file:      ${fetchedMoves} moves\n\n` +
+        `Replace your local layout with the shared one?`
+      );
+      if (!ok) {
+        toast('Kept local layout', 'info', 2200);
+        return;
+      }
+    }
+
+    // Apply the fetched layout
+    customPositions = fetchedPositions;
+    for (let i = 0; i < MAP.players.length; i++) {
+      MAP.players[i].current_row = fetchedPositions[i][0];
+      MAP.players[i].current_col = fetchedPositions[i][1];
+    }
+    currentLayout = 'custom';
+    saveCustomToStorage();
+    updateLayoutChips();
+    updateMovedBadge();
+    recomputeChains();
+    recomputeLayoutHasMoves();
+    requestDraw();
+
+    const moves = countMoveDelta(fetchedPositions);
+    toast(`Loaded shared layout (${moves} moves) from custom.json`, 'success', 3500);
+  })();
+
+  // Helper: turn an imported file's player list into [row,col] positions indexed by current player order.
+  // Validates everything; returns null if invalid or fully empty match.
+  function computeFetchedPositions(data) {
+    if (!Array.isArray(data.players) || data.players.length === 0) return null;
+    const importByOrig = new Map();
+    const importByName = new Map();
+    for (const p of data.players) {
+      if (!Array.isArray(p.position) || p.position.length !== 2) continue;
+      const [r, c] = p.position;
+      if (typeof r !== 'number' || typeof c !== 'number') continue;
+      if (r < 0 || r + 2 > MAP.rows || c < 0 || c + 2 > MAP.cols) continue;
+      if (Array.isArray(p.original) && p.original.length === 2) {
+        importByOrig.set(`${p.original[0]},${p.original[1]}`, [r, c]);
+      } else if (p.name && !importByName.has(p.name)) {
+        importByName.set(p.name, [r, c]);
+      }
+    }
+    if (importByOrig.size === 0 && importByName.size === 0) return null;
+
+    // Start from current positions so partial layouts (only some players specified) don't
+    // crash into players who were unintentionally left at their grid origin.
+    const newPositions = MAP.players.map(p => [p.current_row, p.current_col]);
+    let matched = 0;
+    for (let i = 0; i < MAP.players.length; i++) {
+      const p = MAP.players[i];
+      const pos = importByOrig.get(`${p.grid_row},${p.grid_col}`) || importByName.get(p.map_name);
+      if (pos) { newPositions[i] = pos; matched++; }
+    }
+    if (matched === 0) return null;
+
+    // Validate no overlaps / terrain / building conflicts
+    const seen = new Map();
+    for (let i = 0; i < newPositions.length; i++) {
+      const [r, c] = newPositions[i];
+      for (let dr = 0; dr < 2; dr++) {
+        for (let dc = 0; dc < 2; dc++) {
+          const key = `${r+dr},${c+dc}`;
+          if (seen.has(key)) return null;
+          seen.set(key, i);
+          const t = MAP.terrain[r+dr] && MAP.terrain[r+dr][c+dc];
+          if (t === 'mountain' || t === 'water') return null;
+        }
+      }
+      for (const img of MAP.images) {
+        const isz = img.size || 1;
+        if (r < img.grid_row + isz && r + 2 > img.grid_row &&
+            c < img.grid_col + isz && c + 2 > img.grid_col) return null;
+      }
+    }
+    return newPositions;
+  }
+
+  function arePositionsEqual(a, b) {
+    if (!a || !b || a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i][0] !== b[i][0] || a[i][1] !== b[i][1]) return false;
+    }
+    return true;
+  }
+
+  function countMoveDelta(positions) {
+    let n = 0;
+    for (let i = 0; i < MAP.players.length; i++) {
+      const p = MAP.players[i];
+      if (positions[i][0] !== p.grid_row || positions[i][1] !== p.grid_col) n++;
+    }
+    return n;
+  }
+
   // --- Move mode ---
   let moveMode = false;
   let selectedPlayerIdx = null;   // player selected for swap (index)
+  let moveModeUnlocked = false;   // session flag: once unlocked, no more prompts
 
-  function setMoveMode(on) {
+  function tryUnlockMoveMode() {
+    if (moveModeUnlocked) return Promise.resolve(true);
+    return showPasswordModal().then(answer => {
+      if (answer === null) return false;  // cancelled
+      if (answer.trim().toLowerCase() === 'butt') {
+        moveModeUnlocked = true;
+        toast('Move mode unlocked', 'success', 1800);
+        return true;
+      }
+      toast('Wrong password', 'error', 2000);
+      return false;
+    });
+  }
+
+  function showPasswordModal() {
+    return new Promise((resolve) => {
+      const overlay = document.getElementById('passwordModal');
+      const input = document.getElementById('passwordInput');
+      const okBtn = document.getElementById('passwordOk');
+      const cancelBtn = document.getElementById('passwordCancel');
+      const errEl = document.getElementById('passwordErr');
+
+      input.value = '';
+      errEl.textContent = '';
+      overlay.classList.add('show');
+      // Focus input after the show transition kicks in
+      setTimeout(() => input.focus(), 50);
+
+      function cleanup() {
+        overlay.classList.remove('show');
+        okBtn.removeEventListener('click', onOk);
+        cancelBtn.removeEventListener('click', onCancel);
+        input.removeEventListener('keydown', onKey);
+        overlay.removeEventListener('click', onBgClick);
+      }
+      function onOk() { cleanup(); resolve(input.value); }
+      function onCancel() { cleanup(); resolve(null); }
+      function onKey(e) {
+        if (e.key === 'Enter') { e.preventDefault(); onOk(); }
+        else if (e.key === 'Escape') { e.preventDefault(); onCancel(); }
+      }
+      function onBgClick(e) {
+        if (e.target === overlay) onCancel();
+      }
+      okBtn.addEventListener('click', onOk);
+      cancelBtn.addEventListener('click', onCancel);
+      input.addEventListener('keydown', onKey);
+      overlay.addEventListener('click', onBgClick);
+    });
+  }
+
+  async function setMoveMode(on) {
+    if (on) {
+      const ok = await tryUnlockMoveMode();
+      if (!ok) return;
+    }
     moveMode = on;
     selectedPlayerIdx = null;
     document.body.classList.toggle('move-mode', on);
@@ -1871,6 +2256,25 @@
             ctx.fillStyle = col.text;
             ctx.font = `600 ${Math.min(8, fp * 0.09)}px "JetBrains Mono", monospace`;
             ctx.fillText(p.furnace, x + fp - fp * 0.35 + fp * 0.33 / 2, y + 2 + fp * 0.1);
+          }
+          // Bottom-right corner: coords of the bottom-right tile of the footprint
+          if (fp >= 50) {
+            const brCol = p.current_col + 1;  // bottom-right tile col within map grid
+            const brRow = p.current_row + 1;  // bottom-right tile row within map grid
+            // Guard against any edge case where index is out of range
+            const brX = MAP.x_coords[brCol];
+            const brY = MAP.y_coords[brRow];
+            if (brX != null && brY != null) {
+              ctx.fillStyle = col.text;
+              ctx.globalAlpha = (dim ? 0.3 : 0.85);
+              ctx.font = `600 ${Math.min(14, fp * 0.16)}px "JetBrains Mono", monospace`;
+              ctx.textAlign = 'right';
+              ctx.textBaseline = 'bottom';
+              ctx.fillText(`${brY}·${brX}`, x + fp - 4, y + fp - 3);
+              ctx.globalAlpha = dim ? 0.25 : 1;
+              ctx.textAlign = 'center';  // restore
+              ctx.textBaseline = 'middle';
+            }
           }
         } else if (fp >= 14) {
           ctx.fillStyle = col.text;
@@ -2865,6 +3269,23 @@
         c.fillStyle = col.text;
         c.font = `600 ${8 * SCALE}px "JetBrains Mono", monospace`;
         c.fillText(p.furnace, x + fp - fp * 0.35 + fp * 0.33 / 2, y + 2 + fp * 0.1);
+      }
+
+      // Bottom-right corner: coords of the bottom-right tile
+      const brCol = p.current_col + 1;
+      const brRow = p.current_row + 1;
+      const brX = MAP.x_coords[brCol];
+      const brY = MAP.y_coords[brRow];
+      if (brX != null && brY != null) {
+        c.fillStyle = col.text;
+        c.globalAlpha = 0.85;
+        c.font = `600 ${14 * SCALE}px "JetBrains Mono", monospace`;
+        c.textAlign = 'right';
+        c.textBaseline = 'bottom';
+        c.fillText(`${brY}·${brX}`, x + fp - 4 * SCALE, y + fp - 3 * SCALE);
+        c.globalAlpha = 1;
+        c.textAlign = 'center';
+        c.textBaseline = 'middle';
       }
     }
 
