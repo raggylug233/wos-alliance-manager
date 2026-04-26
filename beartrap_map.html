@@ -1550,6 +1550,9 @@
   // Only works when the page is served over HTTP (file:// + fetch is blocked in browsers).
   // Fails silently if not reachable.
   (async function tryFetchCustomJson() {
+    // Only attempt over http(s). file:// loads can't reliably fetch sibling files
+    // (and even when they "work" they generate noisy console errors).
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') return;
     // Wait for initial render to settle so any prompt doesn't compete with first paint
     await new Promise(r => setTimeout(r, 200));
     let resp;
@@ -1557,7 +1560,7 @@
       // Cache-bust so users always see fresh file when alliance updates it
       resp = await fetch('custom.json?_t=' + Date.now(), { cache: 'no-store' });
     } catch (e) {
-      // Network/file:// error — fail silently
+      // Network error — fail silently
       return;
     }
     if (!resp.ok) return;  // 404 etc. — silent
